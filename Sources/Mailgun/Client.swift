@@ -20,6 +20,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
+import AppSecret
 import DecodableRequest
 import Dependencies
 import DependenciesMacros
@@ -78,49 +79,6 @@ public struct Client {
         self.validate = { emailAddress in
             try await runMailgun(baseUrl: baseUrl, apiKey: apiKey)(mailgunValidate(email: emailAddress))
         }
-    }
-
-    /// Constructs the email address that users can email in order to unsubscribe from a particular newsletter.
-    public func unsubscribeEmail(
-        fromUserId userId: UUID,
-        andNewsletter newsletter: EmailSetting.Newsletter,
-        boundary: String = "--"
-    ) -> EmailAddress? {
-
-        guard
-            let payload = encrypted(
-                text: "\(userId.uuidString)\(boundary)\(newsletter.rawValue)",
-                secret: self.appSecret.rawValue,
-                nonce: [0x30, 0x9D, 0xF8, 0xA2, 0x72, 0xA7, 0x4D, 0x37, 0xB9, 0x02, 0xDF, 0x4F]
-            )
-        else { return nil }
-
-        return .init(rawValue: "unsub-\(payload)@pointfree.co")
-    }
-
-    // Decodes an unsubscribe email address into the user and newsletter that is represented by the address.
-    public func userIdAndNewsletter(
-        fromUnsubscribeEmail email: EmailAddress,
-        boundary: String = "--"
-    ) -> (User.IDValue, EmailSetting.Newsletter)? {
-
-        let payload = email.rawValue
-            .components(separatedBy: "unsub-")
-            .last
-            .flatMap { $0.split(separator: "@").first }
-            .map(String.init)
-
-        return payload
-            .flatMap { decrypted(text: $0, secret: self.appSecret.rawValue) }
-            .map { $0.components(separatedBy: boundary) }
-            .flatMap { components in
-                guard
-                    let userId = components.first.flatMap(User.IDValue.init(uuidString:)),
-                    let newsletter = components.last.flatMap(EmailSetting.Newsletter.init(rawValue:))
-                else { return nil }
-
-                return (userId, newsletter)
-            }
     }
 
     public func verify(payload: MailgunForwardPayload, with apiKey: ApiKey) -> Bool {

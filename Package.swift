@@ -4,6 +4,7 @@ import Foundation
 import PackageDescription
 
 extension String {
+  static let appSecret: Self = "AppSecret"
   static let database: Self = "WebDatabase"
   static let decodableRequest: Self = "DecodableRequest"
   static let emailaddress: Self = "EmailAddress"
@@ -22,6 +23,7 @@ extension String {
 }
 
 extension Target.Dependency {
+  static var appSecret: Self { .target(name: .appSecret) }
   static var database: Self { .target(name: .database) }
   static var decodableRequest: Self { .target(name: .decodableRequest) }
   static var emailaddress: Self { .target(name: .emailaddress) }
@@ -115,6 +117,12 @@ let package = Package(
   ],
   targets: [
     .target(
+      name: .appSecret,
+      dependencies: [
+        .tagged
+      ]
+    ),
+    .target(
       name: .database,
       dependencies: [
         .tagged,
@@ -189,15 +197,18 @@ let package = Package(
     .target(
       name: .mailgun,
       dependencies: [
+        .appSecret,
         .decodableRequest,
-        .emailaddress,
-        .loggingDependencies,
         .dependencies,
         .dependenciesMacros,
-        .httpPipeline,
         .either,
+        .emailaddress,
+        .foundationPrelude,
+        .httpPipeline,
         .logging,
+        .loggingDependencies,
         .memberwiseInit,
+        .tagged,
         .urlFormEncoding,
       ]
     ),
