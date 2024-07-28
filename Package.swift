@@ -295,6 +295,12 @@ let package = Package(
         .toolkit,
         .loggingDependencies
       ]
+    ),
+    .testTarget(
+      name: .httpPipeline + "Tests",
+      dependencies: [
+        .httpPipeline
+      ]
     )
   ]
   //    swiftLanguageVersions: [.version("6")]
