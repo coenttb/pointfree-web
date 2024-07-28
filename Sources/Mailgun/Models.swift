@@ -20,31 +20,52 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-public enum Method {
-  case get
-  case post
-  case put
-  case patch
-  case delete
-  case options
-  case other(String)
+import EmailAddress
+import MemberwiseInit
 
-  public var description: String {
-    switch self {
-    case .get:
-      return "GET"
-    case .post:
-      return "POST"
-    case .put:
-      return "PUT"
-    case .patch:
-      return "PATCH"
-    case .delete:
-      return "DELETE"
-    case .options:
-      return "OPTIONS"
-    case let .other(str):
-      return str
-    }
-  }
+@MemberwiseInit(.public)
+public struct SendEmailResponse: Decodable {
+    public let id: String
+    public let message: String
+}
+
+public enum Tracking: String {
+    case no
+    case yes
+}
+
+public enum TrackingClicks: String {
+    case yes
+    case no
+    case htmlOnly = "htmlonly"
+}
+
+public enum TrackingOpens: String {
+    case yes
+    case no
+    case htmlOnly = "htmlonly"
+}
+
+@MemberwiseInit(.public)
+public struct Email {
+    public var from: EmailAddress
+    public var to: [EmailAddress]
+    @Init(default: nil)
+    public var cc: [EmailAddress]?
+    @Init(default: nil)
+    public var bcc: [EmailAddress]?
+    public var subject: String
+    public var text: String?
+    public var html: String?
+    @Init(default: nil)
+    public var testMode: Bool?
+    @Init(default: nil)
+    public var tracking: Tracking?
+    @Init(default: nil)
+    public var trackingClicks: TrackingClicks?
+    @Init(default: nil)
+    public var trackingOpens: TrackingOpens?
+    public var domain: String
+    @Init(default: [])
+    public var headers: [(String, String)]
 }
