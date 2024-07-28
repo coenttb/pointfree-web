@@ -11,7 +11,7 @@ extension String {
   static let faviconRouter: Self = "FaviconRouter"
   static let foundationPrelude: Self = "FoundationPrelude"
   static let gitHub: Self = "GitHub"
-  static let html: Self = "HTML"
+  static let html: Self = "Web HTML"
   static let httpPipeline: Self = "HttpPipeline"
   static let loggingDependencies: Self = "LoggingDependencies"
   static let mailgun: Self = "Mailgun"
@@ -64,9 +64,9 @@ extension Target.Dependency {
   static var swiftHtml: Self {
     .product(
       name: "HTML",
-      package: "swift-html",
+      package: "swift-html"
 //      moduleAliases: ["SwiftHTML": "HTML"]
-      moduleAliases: ["HTML": "SwiftHTML"]
+//      moduleAliases: ["HTML": "SwiftHTML"]
     )
   }
   static var prelude: Self { .product(name: "Prelude", package: "swift-prelude") }
@@ -115,7 +115,7 @@ let package = Package(
     .library(name: .foundationPrelude, targets: [.foundationPrelude]),
     .library(name: .gitHub, targets: [.gitHub]),
     .library(name: .loggingDependencies, targets: [.loggingDependencies]),
-//    .library(name: .html, targets: [.html]),
+    .library(name: .html, targets: [.html]),
     .library(name: .httpPipeline, targets: [.httpPipeline]),
     .library(name: .mailgun, targets: [.mailgun]),
     .library(name: .nioDependencies, targets: [.nioDependencies]),
@@ -219,7 +219,6 @@ let package = Package(
         .nioHTTPCompression,
         .crypto,
         .cryptor,
-        .swiftHtml,
         .optics,
         .prelude,
         .html,

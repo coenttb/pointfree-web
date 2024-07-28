@@ -1,4 +1,4 @@
-import SwiftHTML
+import HTML
 
 public enum MediaType: CustomStringConvertible {
   case application(Application)
