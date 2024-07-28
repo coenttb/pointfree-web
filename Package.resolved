@@ -1,5 +1,5 @@
 {
-  "originHash" : "685a7a940f39c6e9301906b0f13940b9165d08300c75ee815f3b54b0a8477d05",
+  "originHash" : "ca4fbf986a8995bcff68d75e04ccedef11791eef219a7c4efbbc371d45cfd832",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -44,24 +44,6 @@
       "state" : {
         "revision" : "9f7932f22ab6f64aafadc14491e694179b7d0f6f",
         "version" : "4.14.3"
-      }
-    },
-    {
-      "identity" : "fluent",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vapor/fluent.git",
-      "state" : {
-        "revision" : "dfcbeba27a576c20ff181d496f21ecd45d2c1a71",
-        "version" : "4.11.0"
-      }
-    },
-    {
-      "identity" : "fluent-kit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vapor/fluent-kit.git",
-      "state" : {
-        "revision" : "cff1c3e7e948ac4ac8b6760351aa44795e35df57",
-        "version" : "1.48.6"
       }
     },
     {
@@ -241,7 +223,7 @@
       "location" : "https://github.com/coenttb/swift-html",
       "state" : {
         "branch" : "main",
-        "revision" : "8f21b3e3f9a7aa4e34898adaefb2a4d26c0d8bb1"
+        "revision" : "0d7dc265b3546e351ccd2a748aa0c5501fb2ab04"
       }
     },
     {

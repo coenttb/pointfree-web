@@ -5,7 +5,7 @@
 //  Created by Coen ten Thije Boonkkamp on 27/05/2022.
 //
 
-import HTML_Web
+import HTML
 import Vapor
 import VaporRouting
 

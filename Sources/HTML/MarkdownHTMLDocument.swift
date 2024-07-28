@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import HTML
+import SwiftHTML
 
 //extension BaseHTMLDocument {
 //    static func markdown(

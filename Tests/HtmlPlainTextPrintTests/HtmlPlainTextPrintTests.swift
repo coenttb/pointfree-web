@@ -1,4 +1,4 @@
-import HTML_Web
+import SwiftHTML
 import XCTest
 import SnapshotTesting
 import HtmlPlainTextPrint

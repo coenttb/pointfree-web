@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import HTML
+import SwiftHTML
 
 public struct Favicons: HTML {
     let icon_16x16: String

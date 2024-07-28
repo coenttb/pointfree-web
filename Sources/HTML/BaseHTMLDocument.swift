@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import HTML
+import SwiftHTML
 
 package struct BaseHTMLDocument<
     Styles: HTML,

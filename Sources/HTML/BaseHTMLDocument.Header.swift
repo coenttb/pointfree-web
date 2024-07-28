@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftHTML
 
 extension BaseHTMLDocument {
     struct Header: HTML {

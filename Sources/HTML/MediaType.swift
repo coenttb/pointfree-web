@@ -1,3 +1,5 @@
+import SwiftHTML
+
 public enum MediaType: CustomStringConvertible {
   case application(Application)
   case audio(Audio)

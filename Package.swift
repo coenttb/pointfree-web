@@ -11,6 +11,7 @@ extension String {
   static let faviconRouter: Self = "FaviconRouter"
   static let foundationPrelude: Self = "FoundationPrelude"
   static let gitHub: Self = "GitHub"
+  static let html: Self = "HTML"
   static let httpPipeline: Self = "HttpPipeline"
   static let loggingDependencies: Self = "LoggingDependencies"
   static let mailgun: Self = "Mailgun"
@@ -30,6 +31,7 @@ extension Target.Dependency {
   static var faviconRouter: Self { .target(name: .faviconRouter) }
   static var foundationPrelude: Self { .target(name: .foundationPrelude) }
   static var gitHub: Self { .target(name: .gitHub) }
+  static var html: Self { .target(name: .html) }
   static var httpPipeline: Self { .target(name: .httpPipeline) }
   static var loggingDependencies: Self { .target(name: .loggingDependencies) }
   static var mailgun: Self { .target(name: .mailgun) }
@@ -48,7 +50,6 @@ extension Target.Dependency {
   static var dependencies: Self { .product(name: "Dependencies", package: "swift-dependencies") }
   static var dependenciesMacros: Self { .product(name: "DependenciesMacros", package: "swift-dependencies") }
   static var either: Self { .product(name: "Either", package: "swift-prelude") }
-  static var fluent: Self { .product(name: "Fluent", package: "fluent") }
   static var language: Self { .product(name: "Languages", package: "swift-language") }
   static var logging: Self { .product(name: "Logging", package: "swift-log") }
   static var nio: Self { .product(name: "NIO", package: "swift-nio") }
@@ -60,7 +61,14 @@ extension Target.Dependency {
   static var memberwiseInit: Self { .product(name: "MemberwiseInit", package: "swift-memberwise-init-macro") }
   static var postgresKit: Self { .product(name: "PostgresKit", package: "postgres-kit") }
   static var optics: Self { .product(name: "Optics", package: "swift-prelude") }
-  static var html: Self { .product(name: "HTML", package: "swift-html") }
+  static var swiftHtml: Self {
+    .product(
+      name: "HTML",
+      package: "swift-html",
+//      moduleAliases: ["SwiftHTML": "HTML"]
+      moduleAliases: ["HTML": "SwiftHTML"]
+    )
+  }
   static var prelude: Self { .product(name: "Prelude", package: "swift-prelude") }
   static var tagged: Self { .product(name: "Tagged", package: "swift-tagged") }
   static var taggedMoney: Self { .product(name: "TaggedMoney", package: "swift-tagged") }
@@ -88,6 +96,7 @@ let package = Package(
         .faviconRouter,
         .foundationPrelude,
         .gitHub,
+//        .html,
         .httpPipeline,
         .loggingDependencies,
         .mailgun,
@@ -106,6 +115,7 @@ let package = Package(
     .library(name: .foundationPrelude, targets: [.foundationPrelude]),
     .library(name: .gitHub, targets: [.gitHub]),
     .library(name: .loggingDependencies, targets: [.loggingDependencies]),
+//    .library(name: .html, targets: [.html]),
     .library(name: .httpPipeline, targets: [.httpPipeline]),
     .library(name: .mailgun, targets: [.mailgun]),
     .library(name: .nioDependencies, targets: [.nioDependencies]),
@@ -129,7 +139,6 @@ let package = Package(
     .package(url: "https://github.com/pointfreeco/vapor-routing.git", from: "0.1.3"),
     .package(url: "https://github.com/swift-server/async-http-client", from: "1.19.0"),
     .package(url: "https://github.com/vapor/postgres-kit", from: "2.12.0"),
-    .package(url: "https://github.com/vapor/fluent.git", from: "4.8.0"),
     .package(url: "https://github.com/vapor/vapor.git", from: "4.89.3"),
     .package(url: "https://github.com/mikhailmaslo/macro-codable-kit.git", from: "0.3.0"),
     .package(url: "https://github.com/tenthijeboonkkamp/swift-language.git", branch: "main"),
@@ -197,6 +206,12 @@ let package = Package(
       ]
     ),
     .target(
+      name: .html,
+      dependencies: [
+        .swiftHtml
+      ]
+    ),
+    .target(
       name: .httpPipeline,
       dependencies: [
         .nioCore,
@@ -204,9 +219,10 @@ let package = Package(
         .nioHTTPCompression,
         .crypto,
         .cryptor,
-        .html,
+        .swiftHtml,
         .optics,
-        .prelude
+        .prelude,
+        .html,
       ]
     ),
     .target(
@@ -277,7 +293,7 @@ let package = Package(
         .memberwiseInit,
         .vapor,
         .vaporRouting,
-        .html,
+        .swiftHtml,
         .toolkit,
         .loggingDependencies
       ]

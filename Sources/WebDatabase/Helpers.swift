@@ -1,6 +1,6 @@
 import PostgresKit
 
-extension EventLoopGroupConnectionPool where Source == PostgresConnectionSource {
+extension EventLoopGroupConnectionPool<PostgresConnectionSource>  {
     public var sqlDatabase: SQLDatabase {
         self.database(logger: logger).sql()
     }
