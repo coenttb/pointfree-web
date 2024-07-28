@@ -78,6 +78,27 @@ let package = Package(
     .iOS(.v16)
   ],
   products: [
+    .library(
+      name: "Web",
+      targets: [
+        .appSecret,
+        .database,
+        .decodableRequest,
+        .emailaddress,
+        .faviconRouter,
+        .foundationPrelude,
+        .gitHub,
+        .httpPipeline,
+        .loggingDependencies,
+        .mailgun,
+        .nioDependencies,
+        .sitemap,
+        .translations,
+        .urlFormEncoding,
+        .urlFormCoding,
+        .vaporExtensions,
+      ]
+    ),
     .library(name: .database, targets: [.database]),
     .library(name: .decodableRequest, targets: [.decodableRequest]),
     .library(name: .emailaddress, targets: [.emailaddress]),
