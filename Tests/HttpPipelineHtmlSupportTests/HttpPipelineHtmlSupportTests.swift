@@ -1,7 +1,7 @@
 #if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
-import Html
+import HTML_Web
 import HttpPipeline
 import HttpPipelineHtmlSupport
 import Prelude

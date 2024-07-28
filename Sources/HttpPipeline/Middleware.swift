@@ -2,7 +2,7 @@ import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
-import HtmlPointFree
+import HTML_Web
 import Optics
 import Prelude
 

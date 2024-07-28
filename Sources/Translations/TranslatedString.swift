@@ -219,12 +219,12 @@ public extension String {
         english: "check your mail"
     )
 
-    static func this_link_is_valid_for(_ duration: Date.Time) -> TranslatedString {
-        .init(
-            dutch: "deze link is geldig voor \(duration.description().description)",
-            english: "this link is valid for \(duration.description().description)"
-        )
-    }
+//    static func this_link_is_valid_for(_ duration: Date.Time) -> TranslatedString {
+//        .init(
+//            dutch: "deze link is geldig voor \(duration.description().description)",
+//            english: "this link is valid for \(duration.description().description)"
+//        )
+//    }
 
     static let we_have_emailed_you_instructions_to_reset_your_password: TranslatedString = .init(
         dutch: "we hebben u per e-mail instructies gestuurd om uw wachtwoord opnieuw in te stellen",
