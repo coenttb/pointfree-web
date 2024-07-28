@@ -65,7 +65,6 @@ extension Target.Dependency {
     .product(
       name: "HTML",
       package: "swift-html"
-//      moduleAliases: ["SwiftHTML": "HTML"]
 //      moduleAliases: ["HTML": "SwiftHTML"]
     )
   }
