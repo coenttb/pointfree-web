@@ -5,13 +5,12 @@ import PackageDescription
 
 extension String {
   static let appSecret: Self = "AppSecret"
-  static let database: Self = "WebDatabase"
+  static let database: Self = "DatabaseHelpers"
   static let decodableRequest: Self = "DecodableRequest"
   static let emailaddress: Self = "EmailAddress"
   static let favicon: Self = "Favicon"
   static let foundationPrelude: Self = "FoundationPrelude"
   static let gitHub: Self = "GitHub"
-  static let webHtml: Self = "Web HTML"
   static let httpPipeline: Self = "HttpPipeline"
   static let loggingDependencies: Self = "LoggingDependencies"
   static let mailgun: Self = "Mailgun"
@@ -31,7 +30,6 @@ extension Target.Dependency {
   static var favicon: Self { .target(name: .favicon) }
   static var foundationPrelude: Self { .target(name: .foundationPrelude) }
   static var gitHub: Self { .target(name: .gitHub) }
-  static var webHtml: Self { .target(name: .webHtml) }
   static var httpPipeline: Self { .target(name: .httpPipeline) }
   static var loggingDependencies: Self { .target(name: .loggingDependencies) }
   static var mailgun: Self { .target(name: .mailgun) }
@@ -70,6 +68,29 @@ extension Target.Dependency {
   static var vaporRouting: Self { .product(name: "VaporRouting", package: "vapor-routing") }
 }
 
+extension [Package.Dependency] {
+  static var `default`: Self {
+    [
+      .package(url: "https://github.com/apple/swift-crypto", from: "3.2.0"),
+      .package(url: "https://github.com/apple/swift-nio", from: "2.61.0"),
+      .package(url: "https://github.com/apple/swift-nio-extras.git", from: "1.0.0"),
+      .package(url: "https://github.com/apple/swift-log", from: "1.5.0"),
+      .package(url: "https://github.com/coenttb/swift-html", branch: "main"),
+      .package(url: "https://github.com/gohanlon/swift-memberwise-init-macro", from: "0.3.0"),
+      .package(url: "https://github.com/IBM-Swift/BlueCryptor.git", from: "1.0.0"),
+      .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.1.5"),
+      .package(url: "https://github.com/pointfreeco/swift-tagged.git", from: "0.10.0"),
+      .package(url: "https://github.com/pointfreeco/swift-url-routing", from: "0.6.0"),
+      .package(url: "https://github.com/pointfreeco/vapor-routing.git", from: "0.1.3"),
+      .package(url: "https://github.com/swift-server/async-http-client", from: "1.19.0"),
+      .package(url: "https://github.com/vapor/postgres-kit", from: "2.12.0"),
+      .package(url: "https://github.com/vapor/vapor.git", from: "4.89.3"),
+      .package(url: "https://github.com/mikhailmaslo/macro-codable-kit.git", from: "0.3.0"),
+      .package(url: "https://github.com/pointfreeco/swift-prelude.git", branch: "main"),
+    ]
+  }
+}
+
 let package = Package(
   name: "swift-web",
   platforms: [
@@ -105,7 +126,6 @@ let package = Package(
     .library(name: .foundationPrelude, targets: [.foundationPrelude]),
     .library(name: .gitHub, targets: [.gitHub]),
     .library(name: .loggingDependencies, targets: [.loggingDependencies]),
-    .library(name: .webHtml, targets: [.webHtml]),
     .library(name: .httpPipeline, targets: [.httpPipeline]),
     .library(name: .mailgun, targets: [.mailgun]),
     .library(name: .mediaType, targets: [.mediaType]),
@@ -115,24 +135,7 @@ let package = Package(
     .library(name: .urlFormEncoding, targets: [.urlFormEncoding]),
     .library(name: .vaporExtensions, targets: [.vaporExtensions])
   ],
-  dependencies: [
-    .package(url: "https://github.com/apple/swift-crypto", from: "3.2.0"),
-    .package(url: "https://github.com/apple/swift-nio", from: "2.61.0"),
-    .package(url: "https://github.com/apple/swift-nio-extras.git", from: "1.0.0"),
-    .package(url: "https://github.com/apple/swift-log", from: "1.5.0"),
-    .package(url: "https://github.com/coenttb/swift-html", branch: "main"),
-    .package(url: "https://github.com/gohanlon/swift-memberwise-init-macro", from: "0.3.0"),
-    .package(url: "https://github.com/IBM-Swift/BlueCryptor.git", from: "1.0.0"),
-    .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.1.5"),
-    .package(url: "https://github.com/pointfreeco/swift-tagged.git", from: "0.10.0"),
-    .package(url: "https://github.com/pointfreeco/swift-url-routing", from: "0.6.0"),
-    .package(url: "https://github.com/pointfreeco/vapor-routing.git", from: "0.1.3"),
-    .package(url: "https://github.com/swift-server/async-http-client", from: "1.19.0"),
-    .package(url: "https://github.com/vapor/postgres-kit", from: "2.12.0"),
-    .package(url: "https://github.com/vapor/vapor.git", from: "4.89.3"),
-    .package(url: "https://github.com/mikhailmaslo/macro-codable-kit.git", from: "0.3.0"),
-    .package(url: "https://github.com/pointfreeco/swift-prelude.git", branch: "main"),
-  ],
+  dependencies: .default,
   targets: [
     .target(
       name: .appSecret,
@@ -191,14 +194,6 @@ let package = Package(
         .memberwiseInit,
         .tagged,
         .emailaddress,
-      ]
-    ),
-    .target(
-      name: .webHtml,
-      dependencies: [
-        .swiftHtml,
-        .mediaType,
-        .vaporExtensions
       ]
     ),
     .target(
@@ -290,5 +285,5 @@ let package = Package(
       ]
     )
   ]
-  //    swiftLanguageVersions: [.version("6")]
+//  swiftLanguageVersions: [.version("6")]
 )

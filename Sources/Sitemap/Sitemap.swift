@@ -35,7 +35,7 @@ extension SiteMap {
         public let metadata: MetaData
 
         @MemberwiseInit(.public)
-        public struct MetaData {
+      public struct MetaData: Sendable {
             @Init(default: nil)
             public let lastModification: Date?
             @Init(default: nil)
@@ -85,7 +85,7 @@ extension SiteMap.URL {
 }
 
 extension SiteMap.URL {
-    public enum ChangeFrequency: String {
+    public enum ChangeFrequency: String, Sendable {
         case always = "always"
         case hourly = "hourly"
         case daily = "daily"
