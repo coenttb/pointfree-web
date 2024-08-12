@@ -19,4 +19,5 @@ extension HTMLDocument {
   }
 }
 
-//extension HTMLDocument: AsyncResponseEncodable {}
+// Cannot extend protocol with inheritence clause. The conforming type should declare AsyncResponseEncodable.
+// extension HTMLDocument: AsyncResponseEncodable {}
