@@ -11,13 +11,12 @@ extension String {
   static let faviconRouter: Self = "FaviconRouter"
   static let foundationPrelude: Self = "FoundationPrelude"
   static let gitHub: Self = "GitHub"
-  static let html: Self = "Web HTML"
+  static let webHtml: Self = "Web HTML"
   static let httpPipeline: Self = "HttpPipeline"
   static let loggingDependencies: Self = "LoggingDependencies"
   static let mailgun: Self = "Mailgun"
   static let nioDependencies: Self = "NIODependencies"
   static let sitemap: Self = "Sitemap"
-  static let translations: Self = "Translations"
   static let urlFormCoding: Self = "URLFormCoding"
   static let urlFormEncoding: Self = "UrlFormEncoding"
   static let vaporExtensions: Self = "VaporExtensions"
@@ -31,13 +30,12 @@ extension Target.Dependency {
   static var faviconRouter: Self { .target(name: .faviconRouter) }
   static var foundationPrelude: Self { .target(name: .foundationPrelude) }
   static var gitHub: Self { .target(name: .gitHub) }
-  static var html: Self { .target(name: .html) }
+  static var webHtml: Self { .target(name: .webHtml) }
   static var httpPipeline: Self { .target(name: .httpPipeline) }
   static var loggingDependencies: Self { .target(name: .loggingDependencies) }
   static var mailgun: Self { .target(name: .mailgun) }
   static var nioDependencies: Self { .target(name: .nioDependencies) }
   static var sitemap: Self { .target(name: .sitemap) }
-  static var translations: Self { .target(name: .translations) }
   static var urlFormEncoding: Self { .target(name: .urlFormEncoding) }
   static var urlFormCoding: Self { .target(name: .urlFormCoding) }
   static var vaporExtensions: Self { .target(name: .vaporExtensions) }
@@ -50,7 +48,6 @@ extension Target.Dependency {
   static var dependencies: Self { .product(name: "Dependencies", package: "swift-dependencies") }
   static var dependenciesMacros: Self { .product(name: "DependenciesMacros", package: "swift-dependencies") }
   static var either: Self { .product(name: "Either", package: "swift-prelude") }
-  static var language: Self { .product(name: "Languages", package: "swift-language") }
   static var logging: Self { .product(name: "Logging", package: "swift-log") }
   static var nio: Self { .product(name: "NIO", package: "swift-nio") }
   static var nioCore: Self { .product(name: "NIOCore", package: "swift-nio") }
@@ -61,17 +58,10 @@ extension Target.Dependency {
   static var memberwiseInit: Self { .product(name: "MemberwiseInit", package: "swift-memberwise-init-macro") }
   static var postgresKit: Self { .product(name: "PostgresKit", package: "postgres-kit") }
   static var optics: Self { .product(name: "Optics", package: "swift-prelude") }
-  static var swiftHtml: Self {
-    .product(
-      name: "HTML",
-      package: "swift-html"
-//      moduleAliases: ["HTML": "SwiftHTML"]
-    )
-  }
+  static var swiftHtml: Self { .product(name: "HTML", package: "swift-html") }
   static var prelude: Self { .product(name: "Prelude", package: "swift-prelude") }
   static var tagged: Self { .product(name: "Tagged", package: "swift-tagged") }
   static var taggedMoney: Self { .product(name: "TaggedMoney", package: "swift-tagged") }
-  static var toolkit: Self { .product(name: "ToolKit", package: "toolkit") }
   static var tuple: Self { .product(name: "Tuple", package: "swift-prelude") }
   static var urlRouting: Self { .product(name: "URLRouting", package: "swift-url-routing") }
   static var vapor: Self { .product(name: "Vapor", package: "vapor") }
@@ -95,13 +85,11 @@ let package = Package(
         .faviconRouter,
         .foundationPrelude,
         .gitHub,
-//        .html,
         .httpPipeline,
         .loggingDependencies,
         .mailgun,
         .nioDependencies,
         .sitemap,
-        .translations,
         .urlFormEncoding,
         .urlFormCoding,
         .vaporExtensions,
@@ -114,12 +102,11 @@ let package = Package(
     .library(name: .foundationPrelude, targets: [.foundationPrelude]),
     .library(name: .gitHub, targets: [.gitHub]),
     .library(name: .loggingDependencies, targets: [.loggingDependencies]),
-    .library(name: .html, targets: [.html]),
+    .library(name: .webHtml, targets: [.webHtml]),
     .library(name: .httpPipeline, targets: [.httpPipeline]),
     .library(name: .mailgun, targets: [.mailgun]),
     .library(name: .nioDependencies, targets: [.nioDependencies]),
     .library(name: .sitemap, targets: [.sitemap]),
-    .library(name: .translations, targets: [.translations]),
     .library(name: .urlFormCoding, targets: [.urlFormCoding]),
     .library(name: .urlFormEncoding, targets: [.urlFormEncoding]),
     .library(name: .vaporExtensions, targets: [.vaporExtensions])
@@ -140,9 +127,7 @@ let package = Package(
     .package(url: "https://github.com/vapor/postgres-kit", from: "2.12.0"),
     .package(url: "https://github.com/vapor/vapor.git", from: "4.89.3"),
     .package(url: "https://github.com/mikhailmaslo/macro-codable-kit.git", from: "0.3.0"),
-    .package(url: "https://github.com/tenthijeboonkkamp/swift-language.git", branch: "main"),
     .package(url: "https://github.com/pointfreeco/swift-prelude.git", branch: "main"),
-    .package(url: "https://github.com/tenthijeboonkkamp/toolkit.git", branch: "main")
   ],
   targets: [
     .target(
@@ -205,7 +190,7 @@ let package = Package(
       ]
     ),
     .target(
-      name: .html,
+      name: .webHtml,
       dependencies: [
         .swiftHtml
       ]
@@ -220,7 +205,7 @@ let package = Package(
         .cryptor,
         .optics,
         .prelude,
-        .html,
+        .webHtml,
       ]
     ),
     .target(
@@ -259,8 +244,6 @@ let package = Package(
       name: .urlFormCoding,
       dependencies: [
         .dependencies,
-        .language,
-        .toolkit,
         .urlFormEncoding,
         .urlRouting
       ]
@@ -279,20 +262,12 @@ let package = Package(
       ]
     ),
     .target(
-      name: .translations,
-      dependencies: [
-        .language,
-        .toolkit
-      ]
-    ),
-    .target(
       name: .vaporExtensions,
       dependencies: [
         .memberwiseInit,
         .vapor,
         .vaporRouting,
         .swiftHtml,
-        .toolkit,
         .loggingDependencies
       ]
     ),

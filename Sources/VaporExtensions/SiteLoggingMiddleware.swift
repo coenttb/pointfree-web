@@ -8,14 +8,13 @@
 import Dependencies
 import LoggingDependencies
 import MemberwiseInit
-import ToolKit
 import Vapor
 import VaporRouting
-//import WebDependencies
 
-@MemberwiseInit(.public)
 public struct SiteLoggingMiddleware: AsyncMiddleware {
 
+  public init(){}
+  
     public func respond(to request: Vapor.Request, chainingTo next: Vapor.AsyncResponder) async throws -> Vapor.Response {
 //        @Dependency(\.server_request) var server_request
         @Dependency(\.logger) var logger

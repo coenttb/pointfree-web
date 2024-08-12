@@ -7,13 +7,16 @@
 
 import Dependencies
 import Foundation
-import MemberwiseInit
 
-@MemberwiseInit(.public)
 public struct BasicAuth: Codable, Hashable {
     public var username: String
     public var password: String
 
+  public init(username: String, password: String) {
+    self.username = username
+    self.password = password
+  }
+  
     public static let header: String = "Authorization"
 }
 
