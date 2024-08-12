@@ -71,8 +71,6 @@ public struct Email {
     public var headers: [(String, String)]
 }
 
-
-
 @MemberwiseInit(.public)
 public struct MailgunForwardPayload: Codable, Equatable {
     public let recipient: EmailAddress

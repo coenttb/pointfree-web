@@ -7,6 +7,8 @@
 
 import Foundation
 import HTML
+import Vapor
+import VaporExtensions
 
 package struct BaseHTMLDocument<
     Styles: HTML,
@@ -51,4 +53,8 @@ extension BaseHTMLDocument: HTMLDocument {
     package var body: some HTML {
         _body
     }
+}
+
+extension BaseHTMLDocument: AsyncResponseEncodable {
+  
 }

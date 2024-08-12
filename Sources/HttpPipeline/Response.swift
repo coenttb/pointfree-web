@@ -22,7 +22,7 @@
 
 
 import Foundation
-import Web_HTML
+import MediaType
 import Optics
 import Prelude
 

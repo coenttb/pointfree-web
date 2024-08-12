@@ -8,13 +8,14 @@ extension String {
   static let database: Self = "WebDatabase"
   static let decodableRequest: Self = "DecodableRequest"
   static let emailaddress: Self = "EmailAddress"
-  static let faviconRouter: Self = "FaviconRouter"
+  static let favicon: Self = "Favicon"
   static let foundationPrelude: Self = "FoundationPrelude"
   static let gitHub: Self = "GitHub"
   static let webHtml: Self = "Web HTML"
   static let httpPipeline: Self = "HttpPipeline"
   static let loggingDependencies: Self = "LoggingDependencies"
   static let mailgun: Self = "Mailgun"
+  static let mediaType: Self = "MediaType"
   static let nioDependencies: Self = "NIODependencies"
   static let sitemap: Self = "Sitemap"
   static let urlFormCoding: Self = "URLFormCoding"
@@ -27,13 +28,14 @@ extension Target.Dependency {
   static var database: Self { .target(name: .database) }
   static var decodableRequest: Self { .target(name: .decodableRequest) }
   static var emailaddress: Self { .target(name: .emailaddress) }
-  static var faviconRouter: Self { .target(name: .faviconRouter) }
+  static var favicon: Self { .target(name: .favicon) }
   static var foundationPrelude: Self { .target(name: .foundationPrelude) }
   static var gitHub: Self { .target(name: .gitHub) }
   static var webHtml: Self { .target(name: .webHtml) }
   static var httpPipeline: Self { .target(name: .httpPipeline) }
   static var loggingDependencies: Self { .target(name: .loggingDependencies) }
   static var mailgun: Self { .target(name: .mailgun) }
+  static var mediaType: Self { .target(name: .mediaType) }
   static var nioDependencies: Self { .target(name: .nioDependencies) }
   static var sitemap: Self { .target(name: .sitemap) }
   static var urlFormEncoding: Self { .target(name: .urlFormEncoding) }
@@ -82,12 +84,13 @@ let package = Package(
         .database,
         .decodableRequest,
         .emailaddress,
-        .faviconRouter,
+        .favicon,
         .foundationPrelude,
         .gitHub,
         .httpPipeline,
         .loggingDependencies,
         .mailgun,
+        .mediaType,
         .nioDependencies,
         .sitemap,
         .urlFormEncoding,
@@ -98,13 +101,14 @@ let package = Package(
     .library(name: .database, targets: [.database]),
     .library(name: .decodableRequest, targets: [.decodableRequest]),
     .library(name: .emailaddress, targets: [.emailaddress]),
-    .library(name: .faviconRouter, targets: [.faviconRouter]),
+    .library(name: .favicon, targets: [.favicon]),
     .library(name: .foundationPrelude, targets: [.foundationPrelude]),
     .library(name: .gitHub, targets: [.gitHub]),
     .library(name: .loggingDependencies, targets: [.loggingDependencies]),
     .library(name: .webHtml, targets: [.webHtml]),
     .library(name: .httpPipeline, targets: [.httpPipeline]),
     .library(name: .mailgun, targets: [.mailgun]),
+    .library(name: .mediaType, targets: [.mediaType]),
     .library(name: .nioDependencies, targets: [.nioDependencies]),
     .library(name: .sitemap, targets: [.sitemap]),
     .library(name: .urlFormCoding, targets: [.urlFormCoding]),
@@ -156,7 +160,7 @@ let package = Package(
       ]
     ),
     .target(
-      name: .faviconRouter,
+      name: .favicon,
       dependencies: [
         .urlRouting,
         .vaporRouting
@@ -192,7 +196,9 @@ let package = Package(
     .target(
       name: .webHtml,
       dependencies: [
-        .swiftHtml
+        .swiftHtml,
+        .mediaType,
+        .vaporExtensions
       ]
     ),
     .target(
@@ -205,7 +211,7 @@ let package = Package(
         .cryptor,
         .optics,
         .prelude,
-        .webHtml,
+        .mediaType
       ]
     ),
     .target(
@@ -230,6 +236,12 @@ let package = Package(
         .memberwiseInit,
         .tagged,
         .urlFormEncoding,
+      ]
+    ),
+    .target(
+      name: .mediaType,
+      dependencies: [
+        .swiftHtml
       ]
     ),
     .target(
