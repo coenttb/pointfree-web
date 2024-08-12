@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import VaporRouting
+import URLRouting
 
 extension FaviconRouter {
     public enum Route: String, Codable, Hashable {
