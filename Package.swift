@@ -17,7 +17,7 @@ extension String {
   static let mediaType: Self = "MediaType"
   static let nioDependencies: Self = "NIODependencies"
   static let sitemap: Self = "Sitemap"
-  static let urlFormCoding: Self = "URLFormCoding"
+  static let urlFormCoding: Self = "UrlFormCoding"
   static let urlFormEncoding: Self = "UrlFormEncoding"
   static let vaporExtensions: Self = "VaporExtensions"
 }
