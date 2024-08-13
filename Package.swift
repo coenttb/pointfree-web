@@ -112,6 +112,7 @@ let package = Package(
         .urlFormCoding,
       ]
     ),
+    .library(name: .appSecret, targets: [.appSecret]),
     .library(name: .database, targets: [.database]),
     .library(name: .decodableRequest, targets: [.decodableRequest]),
     .library(name: .emailaddress, targets: [.emailaddress]),
