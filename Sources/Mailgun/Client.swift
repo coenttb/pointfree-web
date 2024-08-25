@@ -94,8 +94,8 @@ public struct Client {
 }
 
 public extension URL {
-  static let mailgun_eu_baseUrl: Self = URL(string: "https://api.mailgun.net")!
-  static let mailgun_usa_baseUrl: Self = URL(string: "https://api.eu.mailgun.net")!
+  static let mailgun_eu_baseUrl: Self = URL(string: "https://api.eu.mailgun.net")!
+  static let mailgun_usa_baseUrl: Self = URL(string: "https://api.mailgun.net")!
 }
 
 extension URLRequest {
