@@ -159,7 +159,8 @@ let package = Package(
       name: .favicon,
       dependencies: [
         .urlRouting,
-        .urlRouting
+        .urlRouting,
+        .swiftHtml
       ]
     ),
     .target(
