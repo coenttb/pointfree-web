@@ -159,7 +159,6 @@ let package = Package(
       name: .favicon,
       dependencies: [
         .urlRouting,
-        .urlRouting,
         .swiftHtml
       ]
     ),
@@ -269,5 +268,5 @@ let package = Package(
       ]
     )
   ]
-//  swiftLanguageVersions: [.version("6")]
+  //  swiftLanguageVersions: [.version("6")]
 )
