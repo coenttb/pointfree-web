@@ -1,4 +1,4 @@
-// swift-tools-version:5.10.1
+// swift-tools-version:6.0
 
 import Foundation
 import PackageDescription
@@ -268,5 +268,5 @@ let package = Package(
       ]
     )
   ],
-  swiftLanguageVersions: [.v5]
+  swiftLanguageModes: [.v5]
 )

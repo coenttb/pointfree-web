@@ -606,7 +606,7 @@ public final class UrlFormDecoder: Decoder {
     ///
     /// - Note: Unkeyed brackets do not specify collection indices, so they cannot accumulate complex
     ///   structures by using multiple keys. See `bracketsWithIndices` as an alternative parsing strategy.
-    public static let brackets = custom(parse(isArray: ^\.isEmpty))
+    nonisolated(unsafe) public static let brackets = custom(parse(isArray: ^\.isEmpty))
 
     /// A parsing strategy that uses keys with a bracketed suffix to produce nested structures.
     ///
@@ -624,7 +624,7 @@ public final class UrlFormDecoder: Decoder {
     ///
     ///     user[pets][0][id]=1&user[pets][0][name]=Fido
     ///     // Parsed as ["user": ["pets": [["id": "1"], ["name": "Fido"]]]]
-    public static let bracketsWithIndices = custom(parse(isArray: { Int($0) != nil }, sort: true))
+    nonisolated(unsafe) public static let bracketsWithIndices = custom(parse(isArray: { Int($0) != nil }, sort: true))
   }
 }
 
@@ -647,7 +647,7 @@ extension UrlFormDecoder.UnkeyedContainer.Key: CodingKey {
   }
 }
 
-private let iso8601 = ((\DateFormatter.calendar) .~ Calendar(identifier: .iso8601))
+nonisolated(unsafe) private let iso8601 = ((\DateFormatter.calendar) .~ Calendar(identifier: .iso8601))
   >>> ((\DateFormatter.locale) .~ Locale(identifier: "en_US_POSIX"))
   >>> ((\DateFormatter.timeZone) .~ TimeZone(abbreviation: "GMT"))
 

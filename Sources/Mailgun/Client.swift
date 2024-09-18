@@ -39,14 +39,14 @@ import FoundationNetworking
 #endif
 
 @DependencyClient
-public struct Client {
+public struct Client: Sendable {
   public typealias ApiKey = Tagged<(Self, apiKey: ()), String>
   public typealias Domain = Tagged<(Self, domain: ()), String>
   
   public let appSecret: AppSecret
   
-  public var sendEmail: (Email) async throws -> SendEmailResponse
-  public var validate: (_ emailAddress: EmailAddress) async throws -> Validation
+  public var sendEmail: @Sendable (Email) async throws -> SendEmailResponse
+  public var validate: @Sendable (_ emailAddress: EmailAddress) async throws -> Validation
   
   
   public struct Validation: Codable {
@@ -105,7 +105,7 @@ extension URLRequest {
   }
 }
 
-private func runMailgun<A>(
+@Sendable private func runMailgun<A>(
   //    baseUrl:URL = URL(string: "https://api.eu.mailgun.net")!,
   baseUrl: URL,
   apiKey: Client.ApiKey
