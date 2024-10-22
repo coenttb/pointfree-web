@@ -35,20 +35,20 @@ public enum Tracking: String {
     case yes
 }
 
-public enum TrackingClicks: String {
+public enum TrackingClicks: String, Sendable {
     case yes
     case no
     case htmlOnly = "htmlonly"
 }
 
-public enum TrackingOpens: String {
+public enum TrackingOpens: String, Sendable {
     case yes
     case no
     case htmlOnly = "htmlonly"
 }
 
 @MemberwiseInit(.public)
-public struct Email {
+public struct Email: Sendable {
     public var from: EmailAddress
     public var to: [EmailAddress]
     @Init(default: nil)
@@ -72,7 +72,7 @@ public struct Email {
 }
 
 @MemberwiseInit(.public)
-public struct MailgunForwardPayload: Codable, Equatable {
+public struct MailgunForwardPayload: Codable, Equatable, Sendable {
     public let recipient: EmailAddress
     public let timestamp: Int
     public let token: String
