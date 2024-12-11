@@ -5,15 +5,14 @@ import PackageDescription
 
 extension String {
   static let appSecret: Self = "AppSecret"
+  static let basicAuth: Self = "BasicAuth"
   static let database: Self = "DatabaseHelpers"
   static let decodableRequest: Self = "DecodableRequest"
   static let emailaddress: Self = "EmailAddress"
   static let favicon: Self = "Favicon"
   static let foundationPrelude: Self = "FoundationPrelude"
-  static let gitHub: Self = "GitHub"
   static let httpPipeline: Self = "HttpPipeline"
   static let loggingDependencies: Self = "LoggingDependencies"
-  static let mailgun: Self = "Mailgun"
   static let mediaType: Self = "MediaType"
   static let nioDependencies: Self = "NIODependencies"
   static let sitemap: Self = "Sitemap"
@@ -28,10 +27,8 @@ extension Target.Dependency {
   static var emailaddress: Self { .target(name: .emailaddress) }
   static var favicon: Self { .target(name: .favicon) }
   static var foundationPrelude: Self { .target(name: .foundationPrelude) }
-  static var gitHub: Self { .target(name: .gitHub) }
   static var httpPipeline: Self { .target(name: .httpPipeline) }
   static var loggingDependencies: Self { .target(name: .loggingDependencies) }
-  static var mailgun: Self { .target(name: .mailgun) }
   static var mediaType: Self { .target(name: .mediaType) }
   static var nioDependencies: Self { .target(name: .nioDependencies) }
   static var sitemap: Self { .target(name: .sitemap) }
@@ -101,10 +98,8 @@ let package = Package(
         .emailaddress,
         .favicon,
         .foundationPrelude,
-        .gitHub,
         .httpPipeline,
         .loggingDependencies,
-        .mailgun,
         .mediaType,
         .nioDependencies,
         .sitemap,
@@ -118,10 +113,8 @@ let package = Package(
     .library(name: .emailaddress, targets: [.emailaddress]),
     .library(name: .favicon, targets: [.favicon]),
     .library(name: .foundationPrelude, targets: [.foundationPrelude]),
-    .library(name: .gitHub, targets: [.gitHub]),
     .library(name: .loggingDependencies, targets: [.loggingDependencies]),
     .library(name: .httpPipeline, targets: [.httpPipeline]),
-    .library(name: .mailgun, targets: [.mailgun]),
     .library(name: .mediaType, targets: [.mediaType]),
     .library(name: .nioDependencies, targets: [.nioDependencies]),
     .library(name: .sitemap, targets: [.sitemap]),
@@ -171,22 +164,8 @@ let package = Package(
         .dependencies,
         .either,
         .logging,
-        .urlFormEncoding
-      ]
-    ),
-    .target(
-      name: .gitHub,
-      dependencies: [
-        .async_http_client,
-        .decodableRequest,
-        .dependencies,
-        .dependenciesMacros,
-        .either,
-        .foundationPrelude,
-        .logging,
-        .memberwiseInit,
+        .urlFormEncoding,
         .tagged,
-        .emailaddress,
       ]
     ),
     .target(
@@ -206,24 +185,6 @@ let package = Package(
       name: .loggingDependencies,
       dependencies: [
         .dependencies
-      ]
-    ),
-    .target(
-      name: .mailgun,
-      dependencies: [
-        .appSecret,
-        .decodableRequest,
-        .dependencies,
-        .dependenciesMacros,
-        .either,
-        .emailaddress,
-        .foundationPrelude,
-        .httpPipeline,
-        .logging,
-        .loggingDependencies,
-        .memberwiseInit,
-        .tagged,
-        .urlFormEncoding,
       ]
     ),
     .target(

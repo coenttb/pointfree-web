@@ -4,11 +4,11 @@
 [![Swift 5.3](https://img.shields.io/badge/swift-5.3-ED523F.svg?style=flat)](https://swift.org/download/)
 [![@pointfreeco](https://img.shields.io/badge/contact-@pointfreeco-5AA9E7.svg?style=flat)](https://twitter.com/pointfreeco)
 
-A collection of frameworks for solving various problems in building a Swift web framework. Each framework focuses on a single problem, like HTML rendering, CSS preprocessing, routing, middleware, and more. They also do not depend on any other framework in the collection. You can choose which pieces you want and don't want, for example you can use `Html` without `Css`.
+A fork of Pointfreeco's swift-web. This is a collection of mopdules for solving various problems in building a Swift web framework.
 
 ## Stability
 
-This library should be considered experimental. If you find its contents useful, please consider maintaining a fork.
+This library should be considered experimental.
 
 ## Installation
 
@@ -17,22 +17,10 @@ import PackageDescription
 
 let package = Package(
   dependencies: [
-    .package(url: "https://github.com/pointfreeco/swift-web.git", .branch("master")),
+    .package(url: "https://github.com/pointfreeco/swift-web.git", .branch("main")),
   ]
 )
 ```
-
-## Getting started
-
-This library contains an extensive test suite and a set of playgrounds that can be explored. To get it running:
-
-* `git clone https://github.com/pointfreeco/swift-web.git`
-* `cd swift-web`
-* `swift package generate-xcodeproj`
-* `xed .`
-* Run tests: Command+U
-* Build: Command+B
-* Open a playground!
 
 ## Included modules
 

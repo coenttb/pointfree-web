@@ -5,10 +5,9 @@
 //  Created by Coen ten Thije Boonkkamp on 01-01-2024.
 //
 
-import Dependencies
 import Foundation
 
-public struct BasicAuth: Codable, Hashable {
+public struct BasicAuth: Sendable, Codable, Hashable {
     public var username: String
     public var password: String
 
@@ -33,9 +32,4 @@ extension BasicAuth: RawRepresentable {
     public var rawValue: RawValue {
         return "\(username):\(password)"
     }
-}
-
-extension BasicAuth: DependencyKey {
-    public static let testValue: Self? = nil
-    public static let liveValue: Self? = nil
 }

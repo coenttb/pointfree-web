@@ -1,3 +1,4 @@
+import Foundation
 import PostgresKit
 
 extension EventLoopGroupConnectionPool<PostgresConnectionSource>  {
@@ -13,21 +14,23 @@ extension SQLDatabase {
 
     public func all<D: Decodable>(
         _ query: SQLQueryString,
-        decoding model: D.Type = D.self
+        decoding model: D.Type = D.self,
+        keyDecodingStrategy: SQLRowDecoder.KeyDecodingStrategy = .convertFromSnakeCase
     ) async throws -> [D] {
         try await self.raw(query)
             .all()
-            .map { try $0.decode(model: model, keyDecodingStrategy: .convertFromSnakeCase) }
+            .map { try $0.decode(model: model, keyDecodingStrategy: keyDecodingStrategy) }
     }
 
     public func first<D: Decodable>(
         _ query: SQLQueryString,
-        decoding model: D.Type = D.self
+        decoding model: D.Type = D.self,
+        keyDecodingStrategy: SQLRowDecoder.KeyDecodingStrategy = .convertFromSnakeCase
     ) async throws -> D {
         try await self.raw(query)
             .first()
             .unwrap()
-            .decode(model: model, keyDecodingStrategy: .convertFromSnakeCase)
+            .decode(model: model, keyDecodingStrategy: keyDecodingStrategy)
     }
 }
 
