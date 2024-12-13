@@ -1,225 +1,105 @@
-# swift-web
+# swift-web: A Modular Web Foundation in Swift
 
-[![CI](https://github.com/pointfreeco/swift-web/workflows/CI/badge.svg)](https://actions-badge.atrox.dev/pointfreeco/swift-web/goto)
-[![Swift 5.3](https://img.shields.io/badge/swift-5.3-ED523F.svg?style=flat)](https://swift.org/download/)
-[![@pointfreeco](https://img.shields.io/badge/contact-@pointfreeco-5AA9E7.svg?style=flat)](https://twitter.com/pointfreeco)
+Welcome to **swift-web** - an updated fork of PointFree's [swift-web](https://github.com/pointfreeco/swift-web). It is a collection of focused modules designed to simplify and streamline web development in Swift. This repository provides reusable building blocks that can be integrated into any Swift-based server or web project.
 
-A fork of Pointfreeco's swift-web. This is a collection of mopdules for solving various problems in building a Swift web framework.
+Each module is crafted for a specific responsibility, ensuring clean architecture and maintainable code. If you're building with Vapor, SwiftNIO, or other Swift server-side frameworks, **swift-web** can help you handle common tasks elegantly.
 
-## Stability
+---
 
-This library should be considered experimental.
+## Features and Modules
+
+swift-web is modular by design. Here's an overview of its core components:
+
+### **AppSecret**
+- Manages secure app secrets with ease.
+
+### **BasicAuth**
+- Provides utilities for handling HTTP Basic Authentication.
+
+### **DatabaseHelpers**
+- Simplifies interactions with your database through reusable helper functions.
+
+### **DecodableRequest**
+- Decodes incoming HTTP requests directly into Swift types using `Codable`.
+
+### **EmailAddress**
+- Defines a robust structure for handling and validating email addresses.
+
+### **Favicon**
+- Handles favicon generation and routing with minimal effort.
+
+### **FoundationPrelude**
+- Extends Foundation utilities, including support for HTTP client operations and URL requests.
+
+### **HttpPipeline**
+- Core HTTP pipeline utilities, including:
+  - `Conn`: Connection handler.
+  - `Method`: HTTP method definitions.
+  - `Middleware`: Middleware utilities for request/response processing.
+  - `Response`: Simplifies HTTP response creation.
+  - `SignedCookies`: Utilities for working with signed cookies.
+  - `Status`: HTTP status management.
+
+### **LoggingDependencies**
+- Implements lightweight logging utilities to integrate with your app's dependency system.
+
+### **MediaType**
+- Provides definitions and utilities for handling media types.
+
+### **NioDependencies**
+- Extensions for working seamlessly with SwiftNIO.
+
+### **Sitemap**
+- Tools for building and serving a sitemap for your website.
+
+### **UrlFormCoding**
+- Encodes and decodes URL-encoded forms for easy form handling.
+
+### **UrlFormEncoding**
+- Utilities for URL form decoding and encoding, tailored for modern web apps.
+
+---
 
 ## Installation
 
-```swift
-import PackageDescription
-
-let package = Package(
-  dependencies: [
-    .package(url: "https://github.com/pointfreeco/swift-web.git", .branch("main")),
-  ]
-)
-```
-
-## Included modules
-
-#### Primary modules
-
-* [`Css`](#css)
-* [`HttpPipeline`](#httppipeline)
-* [`ApplicativeRouter`](#applicativerouter)
-
-#### Supporting modules
-
-* [`HttpPipelineHtmlSupport`](#httppipelinehtmlsupport)
-* [`HtmlCssSupport`](#htmlcsssupport)
-* [`CssReset`](#cssreset)
-
-## `Css`
-
-An EDSL for a CSS preprocessor like [Sass](http://sass-lang.com). A few simple value types and functions allow you to model most of CSS, and allow you express new things not possible in standard CSS.
+To use **swift-web** in your project, add it to your `Package.swift` dependencies:
 
 ```swift
-import Css
-
-let css = body % (
-  padding(all: .rem(2))
-    <> background(Color.hsl(60, 0.5, 0.8))
-)
-
-render(css: css)
-```
-```css
-body {
-  padding-top    : 2rem;
-  padding-right  : 2rem;
-  padding-bottom : 2rem;
-  padding-left   : 2rem;
-  background     : #e6e6b3;
-}
+dependencies: [
+    .package(url: "https://github.com/coenttb/swift-web.git", branch: "main")
+]
 ```
 
-## `HttpPipeline`
+Then import the modules you need in your Swift files:
 
-A few types and functions for modeling server middleware as a simple function that transforms a request to a response. It uses phantom types express the state transitions of when you are allowed to write the status, headers and response body.
-
-```swift
 import HttpPipeline
+import EmailAddress
+import Sitemap
 
-let middleware = writeStatus(.ok)
-  >>> writeHeader(.contentType(.html))
-  >>> closeHeaders
-  >>> send(render(document).data(using: .utf8))
-  >>> end
+## Getting Started
+    1.    Choose Your Modules: Pick the modules relevant to your project. For example, if you’re building an HTTP pipeline, start with HttpPipeline and SignedCookies.
+    2.    Integrate: Use the utilities in your Vapor app, custom SwiftNIO server, or other web framework.
+    3.    Build Your Web App: Leverage modular components to save time and focus on your app’s unique functionality.
 
-let request = URLRequest(url: URL(string: "/")!)
-let conn = connection(from: request).map(const(Data?.none))
-```
-```text
-▿ Step
-  ResponseEnded
+## Contributing
 
-▿ Request
-  GET /
-
-  (Data, 0 bytes)
-
-▿ Response
-  Status 200 OK
-  Content-Type: text/html; charset=utf8
-
-  <html><body><p>Hello world!</p><p>Goodbye!</p><a href="/">Home</a></body></html>
-```
-
-## `ApplicativeRouter`
-
-A router built on the principles of “applicatives” that unifies parsing requests and printing routes. It is robust, composable and type-safe. Its job is to take the incoming, unstructured `URLRequest` from the browser and turn it into a structured value so that your app can do what it needs to do to produce a response. Additionally, given a value, it can do the reverse in which it generates a request that can be used in a hyperlink. Most of the ideas for this library were taking from [this paper](http://www.informatik.uni-marburg.de/~rendel/unparse/).
-
-```swift
-import ApplicativeRouter
-
-struct UserData: Decodable {
-  let email: String
-}
-
-enum Route {
-  case home
-  case episodes
-  case episode(String)
-  case search(String?)
-  case signup(UserData?)
-}
-
-let router = [
-  // Matches: GET /
-  Route.iso.home
-    <¢> .get <% end,
-
-  // Matches: GET /episode/:str
-  Route.iso.episode
-    <¢> get %> lit("episode") %> pathParam(.string) <% end,
-
-  // Matches: GET /episodes
-  Route.iso.episodes
-    <¢> get %> lit("episodes") <% end,
-
-  // Matches: GET /search?query=:optional_string
-  Route.iso.search
-    <¢> get %> lit("search") %> queryParam("query", opt(.string)) <% end,
-
-  // Matches: POST /signup
-  Route.iso.signup
-    <¢> post %> jsonBody(Episode.self) <%> lit("signup") %> opt(.jsonBody)) <% end,
-  ]
-  .reduce(.empty, <|>)
-
-// Match a route given a request
-let request = URLRequest(url: URL(string: "https://www.pointfree.co/episode/001-hello-world")!)
-let route = router.match(request: request)
-// => Route.episode("001-hello-world")
-
-// Generate a string from a route:
-router.absoluteString(for: .episode("001-hello-world"))
-// => /episode/001-hello-world
-```
-
-##  `HttpPipelineHtmlSupport`
-
-Adds middleware for rendering an `Html` view:
-
-```swift
-import Foundation
-import Html
-import HttpPipeline
-import HttpPipelineHtmlSupport
-
-let view = View(p(["Hello world!"]))
-
-let middleware = writeStatus(.ok)
-  >>> respond(view)
-
-let conn = connection(from: URLRequest(url: URL(string: "/")!))
-middleware(conn).response.description
-```
-```text
-Status 200
-Content-Type: text/html
-
-<p>Hello world!</p>
-```
-
-## `HtmlCssSupport`
-
-Adds an element and attribute function to `Html` for render `Css` values into an internal stylesheet or inline styles. The element function `style` allows you to provide a `Stylesheet` value that will be rendered to an internal stylesheet:
-
-```swift
-import Css
-import Html
-import HtmlCssSupport
-
-let css = body % background(red)
-let document = html([head([style(css)])])
-render(document)
-```
-```html
-<html>
-  <head>
-    <style>body{background:#ff0000}</style>
-  </head>
-</html>
-```
-
-The attribute function `style` allows you to render a stylesheet inline directly on an element:
-
-```swift
-import Css
-import Html
-import HtmlCssSupport
-
-let anchorStyle = color(.red)
-  <> textTransform(.capitalize)
-
-let styledDocument = p([
-  "Go back ",
-  a([style(anchorStyle)], ["Home"])
-  ])
-
-print(render(styledDocument, config: pretty))
-```
-```html
-<p>
-  Go back
-  <a style="color:#ff0000;text-transform:capitalize">
-    Home
-  </a>
-</p>
-```
-
-## `CssReset`
-
-Contains a single value `reset` of type `Stylesheet` that resets all of the defaults for a webpage. It can be combined with another stylesheet via `reset <> otherStyles`, or can be directly rendered to a stylesheet string via `render(reset)`.
+Contributions are welcome! Here’s how you can help:
+    1.    Report bugs or issues by opening an issue.
+    2.    Submit pull requests for new features or improvements.
+    3.    Share feedback to make the library better for everyone.
 
 ## License
 
-All modules are released under the MIT license. See [LICENSE](LICENSE) for details.
+swift-web is open-source software licensed under the Apache 2.0 License. See the [LICENSE](LICENSE).
+
+## Feedback is Much Appreciated!
+  
+If you’re working on your own Swift web project, feel free to learn, fork, and contribute.
+
+Got thoughts? Found something you love? Something you hate? Let me know! Your feedback helps make this project better for everyone. Open an issue or start a discussion—I’m all ears.
+
+> tip: 👉 **[Subscribe to my newsletter](http://coenttb.com/en/newsletter/subscribe) **
+>
+> [Follow me on X](http://x.com/coenttb)
+> 
+> [Link on Linkedin](https://www.linkedin.com/in/tenthijeboonkkamp)
