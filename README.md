@@ -70,6 +70,8 @@ dependencies: [
 ]
 ```
 
+---
+
 ## Feedback is Much Appreciated!
   
 If you’re working on your own Swift web project, feel free to learn, fork, and contribute.
@@ -81,6 +83,8 @@ Got thoughts? Found something you love? Something you hate? Let me know! Your fe
 > [Follow me on X](http://x.com/coenttb)
 > 
 > [Link on Linkedin](https://www.linkedin.com/in/tenthijeboonkkamp)
+
+---
 
 ## License
 
