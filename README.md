@@ -78,7 +78,7 @@ If you’re working on your own Swift web project, feel free to learn, fork, and
 
 Got thoughts? Found something you love? Something you hate? Let me know! Your feedback helps make this project better for everyone. Open an issue or start a discussion—I’m all ears.
 
-> tip: 👉 **[Subscribe to my newsletter](http://coenttb.com/en/newsletter/subscribe) **
+> [Subscribe to my newsletter](http://coenttb.com/en/newsletter/subscribe)
 >
 > [Follow me on X](http://x.com/coenttb)
 > 
