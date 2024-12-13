@@ -70,28 +70,6 @@ dependencies: [
 ]
 ```
 
-Then import the modules you need in your Swift files:
-
-import HttpPipeline
-import EmailAddress
-import Sitemap
-
-## Getting Started
-    1.    Choose Your Modules: Pick the modules relevant to your project. For example, if you’re building an HTTP pipeline, start with HttpPipeline and SignedCookies.
-    2.    Integrate: Use the utilities in your Vapor app, custom SwiftNIO server, or other web framework.
-    3.    Build Your Web App: Leverage modular components to save time and focus on your app’s unique functionality.
-
-## Contributing
-
-Contributions are welcome! Here’s how you can help:
-    1.    Report bugs or issues by opening an issue.
-    2.    Submit pull requests for new features or improvements.
-    3.    Share feedback to make the library better for everyone.
-
-## License
-
-swift-web is open-source software licensed under the Apache 2.0 License. See the [LICENSE](LICENSE).
-
 ## Feedback is Much Appreciated!
   
 If you’re working on your own Swift web project, feel free to learn, fork, and contribute.
@@ -103,3 +81,7 @@ Got thoughts? Found something you love? Something you hate? Let me know! Your fe
 > [Follow me on X](http://x.com/coenttb)
 > 
 > [Link on Linkedin](https://www.linkedin.com/in/tenthijeboonkkamp)
+
+## License
+
+swift-web is open-source software licensed under the Apache 2.0 License. See the [LICENSE](LICENSE).
