@@ -1,10 +1,6 @@
 # swift-web: A Modular Web Foundation in Swift
 
-Welcome to **swift-web** - an updated fork of PointFree's [swift-web](https://github.com/pointfreeco/swift-web). It is a collection of focused modules designed to simplify and streamline web development in Swift. This repository provides reusable building blocks that can be integrated into any Swift-based server or web project.
-
-Each module is crafted for a specific responsibility, ensuring clean architecture and maintainable code. If you're building with Vapor, SwiftNIO, or other Swift server-side frameworks, **swift-web** can help you handle common tasks elegantly.
-
----
+`swift-web` is a modern fork of [pointfreeco/swift-web](https://www.github.com/pointfreeco/swift-web), providing modular tools to simplify web development in Swift.
 
 ## Features and Modules
 
@@ -58,8 +54,6 @@ swift-web is modular by design. Here's an overview of its core components:
 ### **UrlFormEncoding**
 - Utilities for URL form decoding and encoding, tailored for modern web apps.
 
----
-
 ## Installation
 
 To use **swift-web** in your project, add it to your `Package.swift` dependencies:
@@ -70,7 +64,14 @@ dependencies: [
 ]
 ```
 
----
+## Related Projects
+
+* [coenttb/swift-html](https://www.github.com/coenttb/coenttb-html): A Swift DSL for HTML and CSS, based on [pointfreeco/swift-html](https://www.github.com/pointfreeco/swift-html), with various extensions and [swift-css](https://www.github.com/coenttb/swift-css) integration.
+* [coenttb-html](https://www.github.com/coenttb/coenttb-html): Extends [coenttb/swift-html](https://www.github.com/coenttb/swift-html) with additional functionality and integrations for HTML, Markdown, Email, and printing HTML to PDF.
+* [swift-css](https://www.github.com/coenttb/swift-css): A Swift DSL for type-safe, extensible, and transformable CSS styles.
+* [coenttb-web](https://www.github.com/coenttb/coenttb-web): Builds on [coenttb/swift-web](https://www.github.com/coenttb/swift-web) with additional features and integrations for Vapor and other frameworks.
+* [coenttb-com-server](https://www.github.com/coenttb/coenttb-com-server): The backend server for coenttb.com, written entirely in Swift and powered by [Vapor](https://www.github.com/vapor/vapor) and [coenttb-web](https://www.github.com/coenttb/coenttb-web).
+* [swift-languages](https://www.github.com/coenttb/swift-languages): A cross-platform translation library written in Swift.
 
 ## Feedback is Much Appreciated!
   
@@ -83,8 +84,6 @@ Got thoughts? Found something you love? Something you hate? Let me know! Your fe
 > [Follow me on X](http://x.com/coenttb)
 > 
 > [Link on Linkedin](https://www.linkedin.com/in/tenthijeboonkkamp)
-
----
 
 ## License
 
