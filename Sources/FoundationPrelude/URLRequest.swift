@@ -106,6 +106,7 @@ public enum Method {
     case get([String: Any])
     case post([String: Any])
     case delete([String: String])
+    case put([String: Any])
 }
 
 extension URLRequest {
