@@ -120,6 +120,9 @@ extension URLRequest {
         case let .delete(params):
             self.httpMethod = "DELETE"
             self.attach(formData: params)
+        case let .put(params):
+            self.httpMethod = "DELETE"
+            self.attach(formData: params)
         }
     }
 }
