@@ -9,9 +9,6 @@ swift-web is modular by design. Here's an overview of its core components:
 ### **AppSecret**
 - Manages secure app secrets with ease.
 
-### **BasicAuth**
-- Provides utilities for handling HTTP Basic Authentication.
-
 ### **DatabaseHelpers**
 - Simplifies interactions with your database through reusable helper functions.
 

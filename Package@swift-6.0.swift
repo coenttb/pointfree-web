@@ -5,7 +5,6 @@ import PackageDescription
 
 extension String {
     static let appSecret: Self = "AppSecret"
-    static let basicAuth: Self = "BasicAuth"
     static let database: Self = "DatabaseHelpers"
     static let decodableRequest: Self = "DecodableRequest"
     static let emailaddress: Self = "EmailAddress"
@@ -22,7 +21,6 @@ extension String {
 
 extension Target.Dependency {
     static var appSecret: Self { .target(name: .appSecret) }
-    static var basicAuth: Self { .target(name: .basicAuth) }
     static var database: Self { .target(name: .database) }
     static var decodableRequest: Self { .target(name: .decodableRequest) }
     static var emailaddress: Self { .target(name: .emailaddress) }
@@ -109,7 +107,6 @@ let package = Package(
             ]
         ),
         .library(name: .appSecret, targets: [.appSecret]),
-        .library(name: .basicAuth, targets: [.basicAuth]),
         .library(name: .database, targets: [.database]),
         .library(name: .decodableRequest, targets: [.decodableRequest]),
         .library(name: .emailaddress, targets: [.emailaddress]),
@@ -130,11 +127,6 @@ let package = Package(
             name: .appSecret,
             dependencies: [
                 .tagged
-            ]
-        ),
-        .target(
-            name: .basicAuth,
-            dependencies: [
             ]
         ),
         .target(
