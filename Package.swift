@@ -5,7 +5,6 @@ import PackageDescription
 
 extension String {
   static let appSecret: Self = "AppSecret"
-  static let basicAuth: Self = "BasicAuth"
   static let database: Self = "DatabaseHelpers"
   static let decodableRequest: Self = "DecodableRequest"
   static let emailaddress: Self = "EmailAddress"
