@@ -1,10 +1,10 @@
-# swift-web: A Modular Web Foundation in Swift
+# pointfree-web: A modular web foundation in Swift
 
-`swift-web` is a modern fork of [pointfreeco/swift-web](https://www.github.com/pointfreeco/swift-web), providing modular tools to simplify web development in Swift.
+`pointfree-web` is a modern fork of [pointfreeco/swift-web](https://www.github.com/pointfreeco/swift-web), supplemented with types from [pointfreeco/pointfreeco](https://www.github.com/pointfreeco/pointfreeco) providing modular tools to simplify web development in Swift.
 
 ## Features and Modules
 
-swift-web is modular by design. Here's an overview of its core components:
+pointfree-web is modular by design. Here's an overview of its core components:
 
 ### **AppSecret**
 - Manages secure app secrets with ease.
@@ -17,9 +17,6 @@ swift-web is modular by design. Here's an overview of its core components:
 
 ### **EmailAddress**
 - Defines a robust structure for handling and validating email addresses.
-
-### **Favicon**
-- Handles favicon generation and routing with minimal effort.
 
 ### **FoundationPrelude**
 - Extends Foundation utilities, including support for HTTP client operations and URL requests.
@@ -42,22 +39,16 @@ swift-web is modular by design. Here's an overview of its core components:
 ### **NioDependencies**
 - Extensions for working seamlessly with SwiftNIO.
 
-### **Sitemap**
-- Tools for building and serving a sitemap for your website.
-
-### **UrlFormCoding**
-- Encodes and decodes URL-encoded forms for easy form handling.
-
 ### **UrlFormEncoding**
 - Utilities for URL form decoding and encoding, tailored for modern web apps.
 
 ## Installation
 
-To use **swift-web** in your project, add it to your `Package.swift` dependencies:
+To use pointfree-web in your project, add it to your `Package.swift` dependencies:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/coenttb/swift-web.git", branch: "main")
+    .package(url: "https://github.com/coenttb/pointfree-web.git", branch: "main")
 ]
 ```
 
@@ -85,4 +76,4 @@ Got thoughts? Found something you love? Something you hate? Let me know! Your fe
 
 ## License
 
-swift-web is open-source software licensed under the Apache 2.0 License. See the [LICENSE](LICENSE).
+pointfree-web is open-source software licensed under the MIT License. See the [LICENSE](LICENSE).

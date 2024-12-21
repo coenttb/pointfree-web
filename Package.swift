@@ -8,16 +8,12 @@ extension String {
     static let database: Self = "DatabaseHelpers"
     static let decodableRequest: Self = "DecodableRequest"
     static let emailaddress: Self = "EmailAddress"
-    static let favicon: Self = "Favicon"
     static let foundationPrelude: Self = "FoundationPrelude"
     static let httpPipeline: Self = "HttpPipeline"
-    static let loggingDependencies: Self = "LoggingDependencies"
-    static let mediaType: Self = "MediaType"
     static let nioDependencies: Self = "NIODependencies"
-    static let sitemap: Self = "Sitemap"
-    static let urlFormCoding: Self = "UrlFormCoding"
     static let urlFormEncoding: Self = "UrlFormEncoding"
-    static let swiftWeb: Self = "SwiftWeb"
+    static let mediaType: Self = "MediaType"
+    static let loggingDependencies: Self = "LoggingDependencies"
 }
 
 extension Target.Dependency {
@@ -25,16 +21,12 @@ extension Target.Dependency {
     static var database: Self { .target(name: .database) }
     static var decodableRequest: Self { .target(name: .decodableRequest) }
     static var emailaddress: Self { .target(name: .emailaddress) }
-    static var favicon: Self { .target(name: .favicon) }
     static var foundationPrelude: Self { .target(name: .foundationPrelude) }
     static var httpPipeline: Self { .target(name: .httpPipeline) }
-    static var loggingDependencies: Self { .target(name: .loggingDependencies) }
-    static var mediaType: Self { .target(name: .mediaType) }
     static var nioDependencies: Self { .target(name: .nioDependencies) }
-    static var sitemap: Self { .target(name: .sitemap) }
-    static var swiftWeb: Self { .target(name: .swiftWeb) }
     static var urlFormEncoding: Self { .target(name: .urlFormEncoding) }
-    static var urlFormCoding: Self { .target(name: .urlFormCoding) }
+    static var mediaType: Self { .target(name: .mediaType) }
+    static var loggingDependencies: Self { .target(name: .loggingDependencies) }
 }
 
 extension Target.Dependency {
@@ -82,47 +74,32 @@ extension [Package.Dependency] {
 }
 
 let package = Package(
-    name: "swift-web",
+    name: "pointfree-web",
     platforms: [
         .macOS(.v14),
         .iOS(.v16)
     ],
     products: [
-        .library(
-            name: .swiftWeb,
-            targets: [
-                .swiftWeb,
-                .appSecret,
-                .database,
-                .decodableRequest,
-                .emailaddress,
-                .favicon,
-                .foundationPrelude,
-                .loggingDependencies,
-                .httpPipeline,
-                .mediaType,
-                .nioDependencies,
-                .sitemap,
-                .urlFormCoding,
-                .urlFormEncoding,
-            ]
-        ),
         .library(name: .appSecret, targets: [.appSecret]),
+        .library(name: .mediaType, targets: [.mediaType]),
         .library(name: .database, targets: [.database]),
         .library(name: .decodableRequest, targets: [.decodableRequest]),
         .library(name: .emailaddress, targets: [.emailaddress]),
-        .library(name: .favicon, targets: [.favicon]),
         .library(name: .foundationPrelude, targets: [.foundationPrelude]),
-        .library(name: .loggingDependencies, targets: [.loggingDependencies]),
         .library(name: .httpPipeline, targets: [.httpPipeline]),
-        .library(name: .mediaType, targets: [.mediaType]),
         .library(name: .nioDependencies, targets: [.nioDependencies]),
-        .library(name: .sitemap, targets: [.sitemap]),
-        .library(name: .urlFormCoding, targets: [.urlFormCoding]),
         .library(name: .urlFormEncoding, targets: [.urlFormEncoding]),
+        .library(name: .loggingDependencies, targets: [.loggingDependencies]),
     ],
     dependencies: .default,
     targets: [
+        
+        .target(
+            name: .loggingDependencies,
+            dependencies: [
+                .dependencies
+            ]
+        ),
         .target(
             name: .appSecret,
             dependencies: [
@@ -143,22 +120,19 @@ let package = Package(
             ]
         ),
         .target(
+            name: .mediaType,
+            dependencies: [
+            ]
+        ),
+        .target(
             name: .emailaddress,
             dependencies: [
                 .tagged
             ]
         ),
         .target(
-            name: .favicon,
-            dependencies: [
-                .urlRouting,
-                .swiftHtml
-            ]
-        ),
-        .target(
             name: .foundationPrelude,
             dependencies: [
-                .loggingDependencies,
                 .nioDependencies,
                 .async_http_client,
                 .dependencies,
@@ -166,6 +140,7 @@ let package = Package(
                 .logging,
                 .urlFormEncoding,
                 .tagged,
+                .loggingDependencies
             ]
         ),
         .target(
@@ -178,19 +153,7 @@ let package = Package(
                 .cryptor,
                 .optics,
                 .prelude,
-                .mediaType
-            ]
-        ),
-        .target(
-            name: .loggingDependencies,
-            dependencies: [
-                .dependencies
-            ]
-        ),
-        .target(
-            name: .mediaType,
-            dependencies: [
-                .swiftHtml
+                .mediaType,
             ]
         ),
         .target(
@@ -202,55 +165,10 @@ let package = Package(
             ]
         ),
         .target(
-            name: .urlFormCoding,
-            dependencies: [
-                .dependencies,
-                .urlFormEncoding,
-                .urlRouting
-            ]
-        ),
-        .target(
             name: .urlFormEncoding,
             dependencies: [
                 .optics,
                 .prelude
-            ]
-        ),
-        .target(
-            name: .sitemap,
-            dependencies: [
-                .memberwiseInit
-            ]
-        ),
-        .target(
-            name: .swiftWeb,
-            dependencies: [
-                .swiftHtml,
-                
-                .appSecret,
-                .database,
-                .decodableRequest,
-                .emailaddress,
-                .favicon,
-                .foundationPrelude,
-                .httpPipeline,
-                .loggingDependencies,
-                .mediaType,
-                .nioDependencies,
-                .sitemap,
-                .urlFormEncoding,
-                .urlFormCoding,
-                .async_http_client,
-                .dependencies,
-                .dependenciesMacros,
-                .either,
-                .logging,
-                .macroCodableKit,
-                .memberwiseInit,
-                .postgresKit,
-                .prelude,
-                .tagged,,
-                .urlRouting,
             ]
         ),
         .testTarget(
