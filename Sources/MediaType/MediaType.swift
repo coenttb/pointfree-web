@@ -1,5 +1,3 @@
-import HTML
-
 public enum MediaType: CustomStringConvertible, Sendable {
   case application(Application)
   case audio(Audio)
