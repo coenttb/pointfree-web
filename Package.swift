@@ -80,6 +80,21 @@ let package = Package(
         .iOS(.v16)
     ],
     products: [
+        .library(
+            name: "PointfreeWeb",
+            targets: [
+                .appSecret,
+                .mediaType,
+                .database,
+                .decodableRequest,
+                .emailaddress,
+                .foundationPrelude,
+                .httpPipeline,
+                .nioDependencies,
+                .urlFormEncoding,
+                .loggingDependencies,
+            ]
+        ),
         .library(name: .appSecret, targets: [.appSecret]),
         .library(name: .mediaType, targets: [.mediaType]),
         .library(name: .database, targets: [.database]),
