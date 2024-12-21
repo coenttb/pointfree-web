@@ -15,6 +15,7 @@ extension String {
     static let mediaType: Self = "MediaType"
     static let nioDependencies: Self = "NIODependencies"
     static let sitemap: Self = "Sitemap"
+    static let swiftWeb: Self = "SwiftWeb"
     static let urlFormCoding: Self = "UrlFormCoding"
     static let urlFormEncoding: Self = "UrlFormEncoding"
 }
@@ -31,6 +32,7 @@ extension Target.Dependency {
     static var mediaType: Self { .target(name: .mediaType) }
     static var nioDependencies: Self { .target(name: .nioDependencies) }
     static var sitemap: Self { .target(name: .sitemap) }
+    static var swiftWeb: Self { .target(name: .swiftWeb) }
     static var urlFormEncoding: Self { .target(name: .urlFormEncoding) }
     static var urlFormCoding: Self { .target(name: .urlFormCoding) }
 }
@@ -88,24 +90,7 @@ let package = Package(
         .iOS(.v16)
     ],
     products: [
-        .library(
-            name: "Web",
-            targets: [
-                .appSecret,
-                .database,
-                .decodableRequest,
-                .emailaddress,
-                .favicon,
-                .foundationPrelude,
-                .httpPipeline,
-                .loggingDependencies,
-                .mediaType,
-                .nioDependencies,
-                .sitemap,
-                .urlFormEncoding,
-                .urlFormCoding,
-            ]
-        ),
+        .library(name: .swiftWeb, targets: [.swiftWeb]),
         .library(name: .appSecret, targets: [.appSecret]),
         .library(name: .database, targets: [.database]),
         .library(name: .decodableRequest, targets: [.decodableRequest]),
@@ -222,6 +207,37 @@ let package = Package(
             name: .sitemap,
             dependencies: [
                 .memberwiseInit
+            ]
+        ),
+        .target(
+            name: .swiftWeb,
+            dependencies: [
+                .swiftHtml,
+                
+                .appSecret,
+                .database,
+                .decodableRequest,
+                .emailaddress,
+                .favicon,
+                .foundationPrelude,
+                .httpPipeline,
+                .loggingDependencies,
+                .mediaType,
+                .nioDependencies,
+                .sitemap,
+                .urlFormEncoding,
+                .urlFormCoding,
+                .async_http_client,
+                .dependencies,
+                .dependenciesMacros,
+                .either,
+                .logging,
+                .macroCodableKit,
+                .memberwiseInit,
+                .postgresKit,
+                .prelude,
+                .tagged,
+                .urlRouting,
             ]
         ),
         .testTarget(
