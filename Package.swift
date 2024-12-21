@@ -57,8 +57,6 @@ extension Target.Dependency {
     static var swiftHtml: Self { .product(name: "HTML", package: "swift-html") }
     static var prelude: Self { .product(name: "Prelude", package: "swift-prelude") }
     static var tagged: Self { .product(name: "Tagged", package: "swift-tagged") }
-    static var taggedMoney: Self { .product(name: "TaggedMoney", package: "swift-tagged") }
-    static var tuple: Self { .product(name: "Tuple", package: "swift-prelude") }
     static var urlRouting: Self { .product(name: "URLRouting", package: "swift-url-routing") }
 }
 
@@ -90,7 +88,25 @@ let package = Package(
         .iOS(.v16)
     ],
     products: [
-        .library(name: .swiftWeb, targets: [.swiftWeb]),
+        .library(
+            name: .swiftWeb,
+            targets: [
+                .swiftWeb,
+                .appSecret,
+                .database,
+                .decodableRequest,
+                .emailaddress,
+                .favicon,
+                .foundationPrelude,
+                .loggingDependencies,
+                .httpPipeline,
+                .mediaType,
+                .nioDependencies,
+                .sitemap,
+                .urlFormCoding,
+                .urlFormEncoding,
+            ]
+        ),
         .library(name: .appSecret, targets: [.appSecret]),
         .library(name: .database, targets: [.database]),
         .library(name: .decodableRequest, targets: [.decodableRequest]),
