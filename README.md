@@ -15,9 +15,6 @@ pointfree-web is modular by design. Here's an overview of its core components:
 ### **DecodableRequest**
 - Decodes incoming HTTP requests directly into Swift types using `Codable`.
 
-### **EmailAddress**
-- Defines a robust structure for handling and validating email addresses.
-
 ### **FoundationPrelude**
 - Extends Foundation utilities, including support for HTTP client operations and URL requests.
 

@@ -7,7 +7,6 @@ extension String {
     static let appSecret: Self = "AppSecret"
     static let database: Self = "DatabaseHelpers"
     static let decodableRequest: Self = "DecodableRequest"
-    static let emailaddress: Self = "EmailAddress"
     static let foundationPrelude: Self = "FoundationPrelude"
     static let httpPipeline: Self = "HttpPipeline"
     static let nioDependencies: Self = "NIODependencies"
@@ -20,7 +19,6 @@ extension Target.Dependency {
     static var appSecret: Self { .target(name: .appSecret) }
     static var database: Self { .target(name: .database) }
     static var decodableRequest: Self { .target(name: .decodableRequest) }
-    static var emailaddress: Self { .target(name: .emailaddress) }
     static var foundationPrelude: Self { .target(name: .foundationPrelude) }
     static var httpPipeline: Self { .target(name: .httpPipeline) }
     static var nioDependencies: Self { .target(name: .nioDependencies) }
@@ -82,7 +80,6 @@ let package = Package(
                 .mediaType,
                 .database,
                 .decodableRequest,
-                .emailaddress,
                 .foundationPrelude,
                 .httpPipeline,
                 .nioDependencies,
@@ -94,7 +91,6 @@ let package = Package(
         .library(name: .mediaType, targets: [.mediaType]),
         .library(name: .database, targets: [.database]),
         .library(name: .decodableRequest, targets: [.decodableRequest]),
-        .library(name: .emailaddress, targets: [.emailaddress]),
         .library(name: .foundationPrelude, targets: [.foundationPrelude]),
         .library(name: .httpPipeline, targets: [.httpPipeline]),
         .library(name: .nioDependencies, targets: [.nioDependencies]),
@@ -132,12 +128,6 @@ let package = Package(
         .target(
             name: .mediaType,
             dependencies: [
-            ]
-        ),
-        .target(
-            name: .emailaddress,
-            dependencies: [
-                .tagged
             ]
         ),
         .target(
