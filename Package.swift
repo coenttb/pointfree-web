@@ -54,6 +54,11 @@ let package = Package(
         .target(
             name: .urlFormEncoding,
             dependencies: [
+                .nioCore,
+                .nioHTTP1,
+                .nioHTTPCompression,
+                .crypto,
+                .cryptor,
                 .optics,
                 .prelude
             ]
