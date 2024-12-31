@@ -4,14 +4,13 @@ import Foundation
 import PackageDescription
 
 extension String {
+    static let pointfreeServer: Self = "PointFree Server"
     static let appSecret: Self = "AppSecret"
     static let database: Self = "DatabaseHelpers"
     static let decodableRequest: Self = "DecodableRequest"
     static let foundationPrelude: Self = "FoundationPrelude"
     static let httpPipeline: Self = "HttpPipeline"
     static let nioDependencies: Self = "NIODependencies"
-    static let urlFormEncoding: Self = "UrlFormEncoding"
-    static let mediaType: Self = "MediaType"
     static let loggingDependencies: Self = "LoggingDependencies"
 }
 
@@ -22,8 +21,6 @@ extension Target.Dependency {
     static var foundationPrelude: Self { .target(name: .foundationPrelude) }
     static var httpPipeline: Self { .target(name: .httpPipeline) }
     static var nioDependencies: Self { .target(name: .nioDependencies) }
-    static var urlFormEncoding: Self { .target(name: .urlFormEncoding) }
-    static var mediaType: Self { .target(name: .mediaType) }
     static var loggingDependencies: Self { .target(name: .loggingDependencies) }
 }
 
@@ -45,6 +42,8 @@ extension Target.Dependency {
     static var prelude: Self { .product(name: "Prelude", package: "swift-prelude") }
     static var tagged: Self { .product(name: "Tagged", package: "swift-tagged") }
     static var urlRouting: Self { .product(name: "URLRouting", package: "swift-url-routing") }
+    static var pointfreeWeb: Self { .product(name: "PointFree Web", package: "pointfree-web") }
+    static var mediaType: Self { .product(name: "MediaType", package: "pointfree-web") }
 }
 
 extension [Package.Dependency] {
@@ -54,7 +53,7 @@ extension [Package.Dependency] {
             .package(url: "https://github.com/apple/swift-nio", from: "2.61.0"),
             .package(url: "https://github.com/apple/swift-nio-extras.git", from: "1.0.0"),
             .package(url: "https://github.com/apple/swift-log", from: "1.5.0"),
-            .package(url: "https://github.com/coenttb/swift-html", branch: "main"),
+            .package(url: "https://github.com/coenttb/pointfree-web", branch: "pointfree-server-extraction"),
             .package(url: "https://github.com/IBM-Swift/BlueCryptor.git", from: "1.0.0"),
             .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.1.5"),
             .package(url: "https://github.com/pointfreeco/swift-tagged.git", from: "0.10.0"),
@@ -67,34 +66,30 @@ extension [Package.Dependency] {
 }
 
 let package = Package(
-    name: "pointfree-web",
+    name: "pointfree-server",
     platforms: [
         .macOS(.v14),
         .iOS(.v16)
     ],
     products: [
         .library(
-            name: "PointfreeWeb",
+            name: .pointfreeServer,
             targets: [
                 .appSecret,
-                .mediaType,
                 .database,
                 .decodableRequest,
                 .foundationPrelude,
                 .httpPipeline,
                 .nioDependencies,
-                .urlFormEncoding,
                 .loggingDependencies,
             ]
         ),
         .library(name: .appSecret, targets: [.appSecret]),
-        .library(name: .mediaType, targets: [.mediaType]),
         .library(name: .database, targets: [.database]),
         .library(name: .decodableRequest, targets: [.decodableRequest]),
         .library(name: .foundationPrelude, targets: [.foundationPrelude]),
         .library(name: .httpPipeline, targets: [.httpPipeline]),
         .library(name: .nioDependencies, targets: [.nioDependencies]),
-        .library(name: .urlFormEncoding, targets: [.urlFormEncoding]),
         .library(name: .loggingDependencies, targets: [.loggingDependencies]),
     ],
     dependencies: .default,
@@ -132,7 +127,7 @@ let package = Package(
                 .dependencies,
                 .either,
                 .logging,
-                .urlFormEncoding,
+                .pointfreeWeb,
                 .tagged,
                 .loggingDependencies
             ]
@@ -147,12 +142,7 @@ let package = Package(
                 .cryptor,
                 .optics,
                 .prelude,
-                .mediaType,
-            ]
-        ),
-        .target(
-            name: .mediaType,
-            dependencies: [
+                .pointfreeWeb,
             ]
         ),
         .target(
@@ -161,13 +151,6 @@ let package = Package(
                 .nioCore,
                 .nioEmbedded,
                 .dependencies
-            ]
-        ),
-        .target(
-            name: .urlFormEncoding,
-            dependencies: [
-                .optics,
-                .prelude
             ]
         ),
         .testTarget(
