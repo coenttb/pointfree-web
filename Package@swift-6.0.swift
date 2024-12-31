@@ -69,12 +69,6 @@ let package = Package(
                 .prelude
             ]
         ),
-        .testTarget(
-            name: .httpPipeline + "Tests",
-            dependencies: [
-                .httpPipeline
-            ]
-        )
     ],
     swiftLanguageModes: [.v5]
 )
