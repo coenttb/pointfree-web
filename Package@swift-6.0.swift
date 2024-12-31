@@ -4,6 +4,7 @@ import Foundation
 import PackageDescription
 
 extension String {
+    static let pointfreeServer: Self = "PointFree Server"
     static let mediaType: Self = "MediaType"
     static let urlFormEncoding: Self = "UrlFormEncoding"
 }
@@ -34,7 +35,7 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "Pointfree Server",
+            name: .pointfreeServer,
             targets: [
                 .mediaType,
                 .urlFormEncoding,
