@@ -4,7 +4,7 @@ import Foundation
 import PackageDescription
 
 extension String {
-    static let pointfreeServer: Self = "PointFree Server"
+    static let pointfreeWeb: Self = "PointFree Web"
     static let mediaType: Self = "MediaType"
     static let urlFormEncoding: Self = "UrlFormEncoding"
 }
@@ -28,14 +28,14 @@ extension [Package.Dependency] {
 }
 
 let package = Package(
-    name: "pointfree-server",
+    name: "pointfree-web",
     platforms: [
         .macOS(.v14),
         .iOS(.v16)
     ],
     products: [
         .library(
-            name: .pointfreeServer,
+            name: .pointfreeWeb,
             targets: [
                 .mediaType,
                 .urlFormEncoding,
