@@ -2,17 +2,19 @@ import Foundation
 import Prelude
 
 /// Encodes an encodable into `x-www-form-urlencoded` format. It first converts the value into a JSON
-/// dictionary, and then it encodes that into the format.
+/// dictionary using the provided encoder, and then encodes that into the format.
 ///
-/// - Parameter value: The encodable value to encode.
-public func urlFormEncode<A: Encodable>(value: A) -> String {
-
-  return (try? JSONEncoder().encode(value))
-    .flatMap { try? JSONSerialization.jsonObject(with: $0) }
-    .flatMap { $0 as? [String: Any] }
-    .map(urlFormEncode(value:))
-    ?? ""
+/// - Parameters:
+///   - value: The encodable value to encode
+///   - encoder: The JSONEncoder to use for the initial encoding step
+public func urlFormEncode<A: Encodable>(value: A, encoder: JSONEncoder = .init()) -> String {
+    return (try? encoder.encode(value))
+        .flatMap { try? JSONSerialization.jsonObject(with: $0) }
+        .flatMap { $0 as? [String: Any] }
+        .map(urlFormEncode(value:))
+        ?? ""
 }
+
 
 /// Encodes an array into `x-www-form-urlencoded` format.
 ///
